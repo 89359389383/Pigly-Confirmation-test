@@ -7,6 +7,7 @@ use App\Models\WeightLog; // "weight_logs"テーブルとやり取りするモ�
 use Illuminate\Http\Request; // フォームから送られた情報などを受け取るためのクラスです。
 use Illuminate\Support\Facades\Auth; // ログインしているユーザー情報を取得するなど、認証に関する機能を使うためのクラスです。
 use App\Http\Requests\WeightLogRequest;
+use App\Models\WeightTarget; // WeightTargetモデルを追加
 
 class WeightLogController extends Controller // WeightLogControllerクラスは、体重ログに関する処理をまとめたコントローラです。
 {
@@ -15,13 +16,20 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
      */
     public function index() // "index"メソッドでは、体重ログの一覧画面を表示します。
     {
+        // ユーザーが認証されていない場合、会員登録画面にリダイレクト
+        if (!auth()->check()) {
+            return redirect()->route('register.step1');
+        }
+
         $user = Auth::user(); // 現在ログインしているユーザー情報を取得します。
         $weightLogs = WeightLog::where('user_id', $user->id) // WeightLogモデルを使って、ログインユーザーのデータだけを取り出します。
             ->orderBy('date', 'desc') // 日付(date)を新しい順(desc)に並べ替えます。
             ->paginate(8); // ページネーションで1ページあたり8件ずつ表示できるようにします。
 
-        return view('weight_logs.index', compact('weightLogs'));
-        // 'weight_logs.index'というビューを表示し、$weightLogsのデータをビューに渡します。
+        // 目標体重を取得（ユーザーごとの `WeightTarget` がある前提）
+        $weightTarget = WeightTarget::where('user_id', $user->id)->first();
+
+        return view('weight_logs.index', compact('weightLogs', 'weightTarget'));
     }
 
     /**

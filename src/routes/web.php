@@ -17,26 +17,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 // トップページ（管理画面）
-Route::get('/weight_logs', [WeightLogController::class, 'index'])->name('weight_logs.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/weight_logs', [WeightLogController::class, 'index'])->name('weight_logs.index');
 
-// 体重登録
-Route::post('/weight_logs/create', [WeightLogController::class, 'store'])->name('weight_logs.store');
+    // 体重登録
+    Route::post('/weight_logs/create', [WeightLogController::class, 'store'])->name('weight_logs.store');
 
-// 体重検索
-Route::get('/weight_logs/search', [WeightLogController::class, 'search'])->name('weight_logs.search');
+    // 体重検索
+    Route::get('/weight_logs/search', [WeightLogController::class, 'search'])->name('weight_logs.search');
 
-// 目標設定
-Route::get('/weight_logs/goal_setting', [GoalSettingController::class, 'edit'])->name('weight_logs.goal_setting');
-Route::post('/weight_logs/goal_setting', [GoalSettingController::class, 'update'])->name('weight_logs.goal_update');
+    // 目標設定
+    Route::get('/weight_logs/goal_setting', [GoalSettingController::class, 'edit'])->name('weight_logs.goal_setting');
+    Route::post('/weight_logs/goal_setting', [GoalSettingController::class, 'update'])->name('weight_logs.goal_update');
 
-// 体重詳細
-Route::get('/weight_logs/{weightLogId}', [WeightLogController::class, 'show'])->name('weight_logs.show');
+    // 体重詳細
+    Route::get('/weight_logs/{weightLogId}', [WeightLogController::class, 'show'])->name('weight_logs.show');
 
-// 体重更新
-Route::post('/weight_logs/{weightLogId}/update', [WeightLogController::class, 'update'])->name('weight_logs.update');
+    // 体重更新
+    Route::post('/weight_logs/{weightLogId}/update', [WeightLogController::class, 'update'])->name('weight_logs.update');
 
-// 体重削除
-Route::delete('/weight_logs/{weightLogId}/delete', [WeightLogController::class, 'destroy'])->name('weight_logs.destroy');
+    // 体重削除
+    Route::delete('/weight_logs/{weightLogId}/delete', [WeightLogController::class, 'destroy'])->name('weight_logs.destroy');
+});
 
 // 会員登録
 Route::get('/register/step1', [AuthController::class, 'showRegistrationForm'])->name('register.step1');

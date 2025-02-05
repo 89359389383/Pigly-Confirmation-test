@@ -60,8 +60,8 @@ class AuthController extends Controller // AuthControllerは「登録」や「�
             'target_weight' => $request->target_weight, // 入力された目標体重をデータベースに保存します。
         ]);
 
-        return redirect()->route('weight_logs.index')->with('success', 'アカウントを作成しました。');
-        // weight_logs.indexのルートにリダイレクトし、「アカウントを作成しました」というメッセージを表示します。
+        return redirect()->route('weight_logs.index');
+        // weight_logs.indexのルートにリダイレクトします。
     }
 
     /**
