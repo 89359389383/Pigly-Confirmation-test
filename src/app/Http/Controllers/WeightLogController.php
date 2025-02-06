@@ -14,22 +14,30 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
     /**
      * 体重管理画面の表示（一覧）
      */
-    public function index() // "index"メソッドでは、体重ログの一覧画面を表示します。
+    public function index()
     {
         // ユーザーが認証されていない場合、会員登録画面にリダイレクト
         if (!auth()->check()) {
             return redirect()->route('register.step1');
         }
 
-        $user = Auth::user(); // 現在ログインしているユーザー情報を取得します。
-        $weightLogs = WeightLog::where('user_id', $user->id) // WeightLogモデルを使って、ログインユーザーのデータだけを取り出します。
-            ->orderBy('date', 'desc') // 日付(date)を新しい順(desc)に並べ替えます。
-            ->paginate(8); // ページネーションで1ページあたり8件ずつ表示できるようにします。
+        $user = Auth::user(); // 現在ログインしているユーザー情報を取得
 
-        // 目標体重を取得（ユーザーごとの `WeightTarget` がある前提）
+        // 体重ログの一覧（ページネーション 8件ずつ）
+        $weightLogs = WeightLog::where('user_id', $user->id)
+            ->orderBy('date', 'desc')
+            ->paginate(8);
+
+        // 最新の体重記録を取得（1件）
+        $latestWeightLog = WeightLog::where('user_id', $user->id)
+            ->orderBy('date', 'desc')
+            ->first();
+
+        // 目標体重を取得
         $weightTarget = WeightTarget::where('user_id', $user->id)->first();
 
-        return view('weight_logs.index', compact('weightLogs', 'weightTarget'));
+        // ビューにデータを渡す
+        return view('weight_logs.index', compact('weightLogs', 'latestWeightLog', 'weightTarget'));
     }
 
     /**
@@ -77,8 +85,7 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
         $weightLog->update($request->all());
         // フォームから送られた全ての入力データ($request->all())を使って$weightLogを更新します。
 
-        return redirect()->route('weight_logs.index')->with('success', '体重情報を更新しました。');
-        // 更新が完了したら、体重ログ一覧ページに戻って「体重情報を更新しました」とメッセージを表示します。
+        return redirect()->route('weight_logs.index');
     }
 
     /**
@@ -91,22 +98,40 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
 
         $weightLog->delete(); // 取得したデータを削除します。
 
-        return redirect()->route('weight_logs.index')->with('success', '体重情報を削除しました。');
-        // 削除が完了したら、体重ログ一覧ページへ戻り「体重情報を削除しました」とメッセージを表示します。
+        return redirect()->route('weight_logs.index');
     }
 
     /**
      * 体重検索
      */
-    public function search(Request $request) // "search"メソッドでは、日付範囲を使った検索を行います。
+    public function search(Request $request)
     {
-        $user = Auth::user(); // ログインしているユーザー情報を取得します。
-        $weightLogs = WeightLog::where('user_id', $user->id) // ログイン中のユーザーに紐づくデータを絞り込みます。
-            ->whereBetween('date', [$request->start_date, $request->end_date]) // 日付が指定された範囲内のものだけをさらに絞り込みます。
-            ->orderBy('date', 'desc') // 日付で並べ替えて最新から順にします。
-            ->paginate(8); // 1ページあたり8件ずつ表示できるようにします。
+        $user = Auth::user();
+        $query = WeightLog::where('user_id', $user->id);
 
-        return view('weight_logs.index', compact('weightLogs'));
-        // 'weight_logs.index'ビューを再利用して、検索結果の体重ログ一覧を表示します。
+        // 検索開始日が入力されている場合
+        if ($request->filled('start_date')) {
+            $query->whereDate('date', '>=', $request->start_date);
+        }
+
+        // 検索終了日が入力されている場合
+        if ($request->filled('end_date')) {
+            $query->whereDate('date', '<=', $request->end_date);
+        }
+
+        // 体重データを取得
+        $weightLogs = $query->orderBy('date', 'desc')->paginate(8);
+
+        // 目標体重を取得
+        $weightTarget = WeightTarget::where('user_id', $user->id)->first();
+
+        // 最新の体重データを取得
+        $latestWeightLog = WeightLog::where('user_id', $user->id)
+            ->orderBy('date', 'desc')
+            ->first();
+
+        return view('weight_logs.index', compact('weightLogs', 'weightTarget', 'latestWeightLog'))
+            ->with('start_date', $request->start_date)
+            ->with('end_date', $request->end_date);
     }
 }

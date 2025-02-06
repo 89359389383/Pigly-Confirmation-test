@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\WeightTarget;
 use App\Models\WeightLog;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,11 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password19980614'),
             ]
         );
+
+        // 目標体重を作成
+        WeightTarget::factory()->create([
+            'user_id' => $user->id,
+        ]);
 
         // そのユーザーに紐づく35件の体重ログを作成
         WeightLog::factory(35)->create([

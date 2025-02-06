@@ -16,12 +16,10 @@
 
         <!-- 修正: フォームのactionにstoreInitialGoalを指定 -->
         <form method="POST" action="{{ route('register.initial_goal') }}">
-            @csrf <!-- CSRFトークンを追加 -->
-
+            @csrf
             <div class="form-group">
                 <label class="form-label">現在の体重</label>
                 <div class="input-group">
-                    <!-- 修正: name="current_weight" を追加 -->
                     <input type="number" name="current_weight" class="form-input" placeholder="現在の体重を入力" required step="0.1">
                     <span class="unit">kg</span>
                 </div>
@@ -33,7 +31,6 @@
             <div class="form-group">
                 <label class="form-label">目標の体重</label>
                 <div class="input-group">
-                    <!-- 修正: name="target_weight" を追加 -->
                     <input type="number" name="target_weight" class="form-input" placeholder="目標の体重を入力" required step="0.1">
                     <span class="unit">kg</span>
                 </div>

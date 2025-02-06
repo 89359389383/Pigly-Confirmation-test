@@ -43,7 +43,6 @@ class GoalSettingController extends Controller // GoalSettingControllerクラス
             // まだ目標体重が登録されていない場合は、新しく目標体重のデータを作ります。
         }
 
-        return redirect()->route('weight_logs.index')->with('success', '目標体重を更新しました。');
-        // 更新が完了したら体重ログ一覧ページに移動し、「目標体重を更新しました」というメッセージを表示します。
+        return redirect()->route('weight_logs.index');
     }
 }

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash; // パスワードのハッシュ化（暗�
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\GoalSettingRequest;
+use App\Models\WeightLog; // WeightLogモデルを追加
 
 class AuthController extends Controller // AuthControllerは「登録」や「ログイン」などの認証に関する処理をまとめたコントローラです。
 {
@@ -53,11 +54,23 @@ class AuthController extends Controller // AuthControllerは「登録」や「�
      */
     public function storeInitialGoal(GoalSettingRequest $request) // フォームから入力された初期目標体重をデータベースに保存するメソッドです。
     {
-        // バリデーションコードは別ファイルで行うため、ここでは省略します。
+        $userId = Auth::id(); // ログイン中のユーザーのIDを取得
 
         WeightTarget::create([ // 新しい目標体重データを作成します。
             'user_id' => Auth::id(), // ログイン中のユーザーのIDを設定します。
             'target_weight' => $request->target_weight, // 入力された目標体重をデータベースに保存します。
+        ]);
+
+        // 現在の体重を weight_logs に登録
+        WeightLog::create([
+            'user_id' => $userId, // ユーザーID
+            'date' => now()->toDateString(), // 現在の日付
+            'weight' => $request->current_weight, // 入力された現在の体重
+            'calories' => null, // 初回登録時はカロリー情報なし
+            'exercise_time' => null, // 初回登録時は運動時間なし
+            'exercise_content' => null, // 初回登録時は運動内容なし
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return redirect()->route('weight_logs.index');

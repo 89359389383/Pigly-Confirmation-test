@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WeightLogFactory extends Factory
 {
+    protected $model = WeightLog::class;
     /**
      * Define the model's default state.
      *
@@ -18,7 +19,7 @@ class WeightLogFactory extends Factory
         return [
             'user_id' => User::factory(), // ユーザーを自動で関連付け
             'date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'), // 過去1年間のランダムな日付
-            'weight' => $this->faker->randomFloat(1, 50, 100), // 50.0kg〜100.0kgの範囲
+            'weight' => $this->faker->randomFloat(1, 60, 100), // 60.0kg〜100.0kgの範囲
             'calories' => $this->faker->numberBetween(1200, 3500), // 1200〜3500kcal
             'exercise_time' => $this->faker->time('H:i'), // ランダムな時間（例: 00:30）
             'exercise_content' => $this->faker->sentence(), // 簡単な文章
