@@ -56,8 +56,7 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
             'exercise_content' => $request->exercise_content, // フォームから送られた運動内容をセットします（null可）。
         ]);
 
-        return redirect()->route('weight_logs.index')->with('success', '体重を登録しました。');
-        // 登録が完了したら、体重ログ一覧ページに戻って「体重を登録しました」とメッセージを表示します。
+        return redirect()->route('weight_logs.index');
     }
 
     /**
