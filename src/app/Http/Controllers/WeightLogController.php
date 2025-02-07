@@ -8,6 +8,7 @@ use Illuminate\Http\Request; // フォームから送られた情報などを受
 use Illuminate\Support\Facades\Auth; // ログインしているユーザー情報を取得するなど、認証に関する機能を使うためのクラスです。
 use App\Http\Requests\WeightLogRequest;
 use App\Models\WeightTarget; // WeightTargetモデルを追加
+use App\Http\Requests\GoalSettingRequest; // GoalSettingRequestをインポート
 
 class WeightLogController extends Controller // WeightLogControllerクラスは、体重ログに関する処理をまとめたコントローラです。
 {

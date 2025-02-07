@@ -37,7 +37,9 @@
             </div>
 
             @error('target_weight')
-            <p class="error-message">{{ $message }}</p>
+            <p class="error-message" style="color: red;">
+                {!! nl2br(e($message)) !!}
+            </p>
             @enderror
 
             <div class="button-group">

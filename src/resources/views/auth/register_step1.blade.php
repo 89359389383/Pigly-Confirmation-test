@@ -19,20 +19,32 @@
 
             <div class="form-group">
                 <label for="name">お名前</label>
-                <input type="text" id="name" name="name" placeholder="名前を入力" value="{{ old('name') }}" required>
-                @error('name') <p class="error-message">{{ $message }}</p> @enderror
+                <input type="text" id="name" name="name" placeholder="名前を入力" value="{{ old('name') }}">
+                @error('name')
+                <p class="error-message" style="color: red;">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="email">メールアドレス</label>
-                <input type="email" id="email" name="email" placeholder="メールアドレスを入力" value="{{ old('email') }}" required>
-                @error('email') <p class="error-message">{{ $message }}</p> @enderror
+                <input type="text" id="email" name="email" placeholder="メールアドレスを入力" value="{{ old('email') }}">
+                @error('email')
+                <p class="error-message" style="color: red;">
+                    {!! nl2br(e($message)) !!}
+                </p>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="password">パスワード</label>
-                <input type="password" id="password" name="password" placeholder="パスワードを入力" required>
-                @error('password') <p class="error-message">{{ $message }}</p> @enderror
+                <input type="password" id="password" name="password" placeholder="パスワードを入力">
+                @error('password')
+                <p class="error-message" style="color: red;">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
 
             <button type="submit" class="submit-btn">次に進む</button>

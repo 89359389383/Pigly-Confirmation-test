@@ -20,22 +20,26 @@
             <div class="form-group">
                 <label class="form-label">現在の体重</label>
                 <div class="input-group">
-                    <input type="number" name="current_weight" class="form-input" placeholder="現在の体重を入力" required step="0.1">
+                    <input type="number" name="current_weight" class="form-input" placeholder="現在の体重を入力" step="0.1">
                     <span class="unit">kg</span>
                 </div>
-                @error('current_weight')
-                <p class="error-message">{{ $message }}</p>
+                @error('weight')
+                <p class="error-message" style="color: red;">
+                    {!! nl2br(e($message)) !!}
+                </p>
                 @enderror
             </div>
 
             <div class="form-group">
                 <label class="form-label">目標の体重</label>
                 <div class="input-group">
-                    <input type="number" name="target_weight" class="form-input" placeholder="目標の体重を入力" required step="0.1">
+                    <input type="number" name="target_weight" class="form-input" placeholder="目標の体重を入力" step="0.1">
                     <span class="unit">kg</span>
                 </div>
                 @error('target_weight')
-                <p class="error-message">{{ $message }}</p>
+                <p class="error-message" style="color: red;">
+                    {!! nl2br(e($message)) !!}
+                </p>
                 @enderror
             </div>
 

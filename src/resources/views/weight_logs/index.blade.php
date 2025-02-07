@@ -184,27 +184,52 @@
                 @csrf
                 <div class="form-group">
                     <label class="form-label">日付 <span class="required-badge">必須</span></label>
-                    <input type="date" class="form-input" name="date" value="{{ now()->toDateString() }}" required>
+                    <input type="date" class="form-input" name="date" value="{{ now()->toDateString() }}">
+                    @error('date')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">体重 <span class="required-badge">必須</span></label>
-                    <input type="number" class="form-input" name="weight" step="0.1" required>
+                    <input type="number" class="form-input" name="weight" step="0.1">
+                    @error('weight')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">摂取カロリー <span class="required-badge">必須</span></label>
-                    <input type="number" class="form-input" name="calories" required>
+                    <input type="number" class="form-input" name="calories">
+                    @error('calories')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">運動時間 <span class="required-badge">必須</span></label>
-                    <input type="time" class="form-input" name="exercise_time" required>
+                    <input type="time" class="form-input" name="exercise_time">
+                    @error('exercise_time')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">運動内容</label>
-                    <textarea class="form-input" placeholder="運動内容を追加" rows="4"></textarea>
+                    <textarea name="exercise_content" class="form-input" placeholder="運動内容を追加" rows="4"></textarea>
+                    @error('exercise_content')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <div class="button-group">

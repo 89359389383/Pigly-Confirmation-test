@@ -30,6 +30,11 @@
                 <div class="form-group">
                     <label for="date">日付</label>
                     <input type="date" name="date" value="{{ $weightLog->date }}">
+                    @error('date')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <!-- 体重 -->
@@ -39,6 +44,11 @@
                         <input type="number" name="weight" value="{{ $weightLog->weight }}" step="0.1">
                         <span class="unit">kg</span>
                     </div>
+                    @error('weight')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <!-- 摂取カロリー -->
@@ -48,18 +58,33 @@
                         <input type="number" name="calories" value="{{ $weightLog->calories }}">
                         <span class="unit">cal</span>
                     </div>
+                    @error('calories')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <!-- 運動時間 -->
                 <div class="form-group">
                     <label for="exercise-time">運動時間</label>
                     <input type="time" name="exercise_time" value="{{ $weightLog->exercise_time }}">
+                    @error('exercise_time')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <!-- 運動内容 -->
                 <div class="form-group">
                     <label for="exercise-details">運動内容</label>
                     <textarea name="exercise_content" placeholder="運動内容を追加">{{ $weightLog->exercise_content }}</textarea>
+                    @error('exercise_content')
+                    <p class="error-message" style="color: red;">
+                        {!! nl2br(e($message)) !!}
+                    </p>
+                    @enderror
                 </div>
 
                 <!-- ボタン -->
