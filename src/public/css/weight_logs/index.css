@@ -53,12 +53,6 @@ body {
     margin-left: 0.25rem;
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-}
-
 .date-range {
     display: flex;
     align-items: center;

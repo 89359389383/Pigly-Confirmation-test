@@ -6,6 +6,12 @@
     <title>PiGLy - Weight Tracker</title>
     <link rel="stylesheet" href="{{ asset('css/weight_logs/index.css') }}">
     <style>
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -33,6 +39,10 @@
             font-size: 1rem;
             text-decoration: none;
             /* 下線を消す */
+        }
+
+        .search-results {
+            margin-bottom: 20px;
         }
 
         .modal-overlay {
@@ -224,6 +234,18 @@
             </form>
             <button class="add-data-btn">データ追加</button>
         </div>
+
+        <!-- 検索結果の表示 -->
+        @if(request('start_date') || request('end_date'))
+        <div class="search-results">
+            <p>
+                {{ request('start_date') ? \Carbon\Carbon::parse(request('start_date'))->format('Y年m月d日') : '開始日未指定' }}
+                ～
+                {{ request('end_date') ? \Carbon\Carbon::parse(request('end_date'))->format('Y年m月d日') : '終了日未指定' }}
+                の検索結果 {{ $weightLogs->total() }} 件
+            </p>
+        </div>
+        @endif
 
         <table class="data-table">
             <thead>
