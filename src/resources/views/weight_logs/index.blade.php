@@ -322,11 +322,27 @@
     </div>
 
     <script>
-        document.querySelector(".add-data-btn").addEventListener("click", () => {
-            document.getElementById("modal-overlay").style.display = "flex";
-        });
-        document.getElementById("closeModal").addEventListener("click", () => {
-            document.getElementById("modal-overlay").style.display = "none";
+        document.addEventListener("DOMContentLoaded", function() {
+            const modalOverlay = document.getElementById("modal-overlay");
+            const addDataBtn = document.querySelector(".add-data-btn");
+            const closeModalBtn = document.getElementById("closeModal");
+
+            // モーダルを開く処理
+            addDataBtn.addEventListener("click", () => {
+                modalOverlay.style.display = "flex";
+            });
+
+            // モーダルを閉じる処理
+            closeModalBtn.addEventListener("click", () => {
+                modalOverlay.style.display = "none";
+            });
+
+            // ページ読み込み時にバリデーションエラーがあったらモーダルを開く
+            if (document.querySelector(".error-message")) {
+                modalOverlay.style.display = "flex";
+            } else {
+                modalOverlay.style.display = "none"; // エラーがなければモーダルを閉じる
+            }
         });
     </script>
 </body>

@@ -46,8 +46,6 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
      */
     public function store(WeightLogRequest $request) // "store"メソッドでは、新しい体重ログの登録を行います。
     {
-        // バリデーションは別ファイルで行うため、このメソッドからは削除しています。
-
         WeightLog::create([ // WeightLogモデルのcreateメソッドを使って新しいレコードを作成します。
             'user_id' => Auth::id(), // ログインしているユーザーのIDをセットします。
             'date' => $request->date, // フォームから送られた日付をセットします。
@@ -133,5 +131,12 @@ class WeightLogController extends Controller // WeightLogControllerクラスは�
         return view('weight_logs.index', compact('weightLogs', 'weightTarget', 'latestWeightLog'))
             ->with('start_date', $request->start_date)
             ->with('end_date', $request->end_date);
+    }
+
+    // バリデーションエラー時の処理
+    public function storeWithValidationError(Request $request)
+    {
+        session()->flash('show_modal', true);
+        return redirect()->back()->withErrors($request->errors())->withInput();
     }
 }
