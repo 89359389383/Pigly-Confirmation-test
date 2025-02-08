@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// トップページ（管理画面）
-Route::middleware('auth')->group(function () {
-    Route::get('/weight_logs', [WeightLogController::class, 'index'])->name('weight_logs.index');
+Route::get('/weight_logs', [WeightLogController::class, 'index'])->name('weight_logs.index');
 
+// 体重管理の他のルートは認証が必要
+Route::middleware('auth')->group(function () {
     // 体重登録
     Route::post('/weight_logs/create', [WeightLogController::class, 'store'])->name('weight_logs.store');
 
