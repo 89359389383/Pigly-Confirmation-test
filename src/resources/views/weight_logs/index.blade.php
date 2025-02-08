@@ -38,7 +38,6 @@
             gap: 0.5rem;
             font-size: 1rem;
             text-decoration: none;
-            /* 下線を消す */
         }
 
         .search-results {
@@ -60,12 +59,9 @@
         .modal {
             background-color: white;
             padding: 1.088rem;
-            /* 1.36rem * 0.8 */
             border-radius: 5.6px;
-            /* 7px * 0.8 */
             width: 90%;
             max-width: 408px;
-            /* 510px * 0.8 */
         }
 
         .modal-title {
@@ -76,16 +72,13 @@
 
         .form-group {
             margin-bottom: 0.816rem;
-            /* 1.02rem * 0.8 */
         }
 
         .form-label {
             display: flex;
             align-items: center;
             margin-bottom: 0.272rem;
-            /* 0.34rem * 0.8 */
             font-size: 0.68rem;
-            /* 0.85rem * 0.8 */
         }
 
         .required-badge {
@@ -100,12 +93,9 @@
         .form-input {
             width: 100%;
             padding: 0.272rem;
-            /* 0.34rem * 0.8 */
             border: 1px solid #e0e0e0;
             border-radius: 2.4px;
-            /* 3px * 0.8 */
             font-size: 0.646rem;
-            /* 0.8075rem * 0.8 */
         }
 
         .form-input::placeholder {
@@ -122,12 +112,9 @@
         .button {
             flex: 1;
             padding: 0.544rem;
-            /* 0.68rem * 0.8 */
             border: none;
             border-radius: 2.4px;
-            /* 3px * 0.8 */
             font-size: 0.646rem;
-            /* 0.8075rem * 0.8 */
             cursor: pointer;
             text-align: center;
         }
@@ -157,12 +144,10 @@
         .unit::after {
             position: absolute;
             right: 0.68rem;
-            /* 0.85rem * 0.8 */
             top: 50%;
             transform: translateY(-50%);
             color: #666;
             font-size: 0.646rem;
-            /* 0.8075rem * 0.8 */
         }
 
         .unit-kg::after {
@@ -175,7 +160,6 @@
 
         textarea.form-input {
             height: 54.4px;
-            /* 68px * 0.8 */
             resize: vertical;
         }
     </style>
@@ -235,7 +219,6 @@
             <button class="add-data-btn">データ追加</button>
         </div>
 
-        <!-- 検索結果の表示 -->
         @if(request('start_date') || request('end_date'))
         <div class="search-results">
             <p>
@@ -279,7 +262,6 @@
         </div>
     </main>
 
-    <!-- モーダルのオーバーレイ -->
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal">
             <h2 class="modal-title">Weight Logを追加</h2>
@@ -349,21 +331,18 @@
             const addDataBtn = document.querySelector(".add-data-btn");
             const closeModalBtn = document.getElementById("closeModal");
 
-            // モーダルを開く処理
             addDataBtn.addEventListener("click", () => {
                 modalOverlay.style.display = "flex";
             });
 
-            // モーダルを閉じる処理
             closeModalBtn.addEventListener("click", () => {
                 modalOverlay.style.display = "none";
             });
 
-            // ページ読み込み時にバリデーションエラーがあったらモーダルを開く
             if (document.querySelector(".error-message")) {
                 modalOverlay.style.display = "flex";
             } else {
-                modalOverlay.style.display = "none"; // エラーがなければモーダルを閉じる
+                modalOverlay.style.display = "none";
             }
         });
     </script>

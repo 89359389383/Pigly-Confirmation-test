@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // すでに登録されている場合は更新、なければ作成
         $user = User::updateOrCreate(
-            ['email' => 'test@example.com'], // 検索条件
+            ['email' => 'test@example.com'],
             [
                 'name' => 'Test',
                 'password' => bcrypt('password19980614'),

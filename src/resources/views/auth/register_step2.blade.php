@@ -50,7 +50,6 @@
         <h2 class="title">新規会員登録</h2>
         <p class="step">STEP2 体重データの入力</p>
 
-        <!-- 修正: フォームのactionにstoreInitialGoalを指定 -->
         <form method="POST" action="{{ route('register.initial_goal') }}">
             @csrf
             <div class="form-group">
