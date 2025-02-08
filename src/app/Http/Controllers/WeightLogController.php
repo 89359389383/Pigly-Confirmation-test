@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\WeightLogRequest;
 use App\Models\WeightTarget;
-use App\Http\Requests\GoalSettingRequest;
 
 class WeightLogController extends Controller
 {
+    private const ITEMS_PER_PAGE = 8;
+
     /**
      * 体重管理画面の表示（一覧）
      */
@@ -23,7 +24,7 @@ class WeightLogController extends Controller
         $user = Auth::user();
         $weightLogs = WeightLog::where('user_id', $user->id)
             ->orderBy('date', 'desc')
-            ->paginate(8);
+            ->paginate(self::ITEMS_PER_PAGE);
         $latestWeightLog = WeightLog::where('user_id', $user->id)
             ->orderBy('date', 'desc')
             ->first();
@@ -96,7 +97,7 @@ class WeightLogController extends Controller
             $query->whereDate('date', '<=', $request->end_date);
         }
 
-        $weightLogs = $query->orderBy('date', 'desc')->paginate(8);
+        $weightLogs = $query->orderBy('date', 'desc')->paginate(self::ITEMS_PER_PAGE);
         $weightTarget = WeightTarget::where('user_id', $user->id)->first();
         $latestWeightLog = WeightLog::where('user_id', $user->id)
             ->orderBy('date', 'desc')
