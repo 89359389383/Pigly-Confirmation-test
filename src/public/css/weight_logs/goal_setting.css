@@ -42,15 +42,6 @@ body {
     gap: 0.5rem;
 }
 
-.main-content {
-    max-width: 400px;
-    margin: 4rem auto;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .title {
     text-align: center;
     margin-bottom: 2rem;
@@ -97,14 +88,4 @@ body {
 
 .button:hover {
     opacity: 0.9;
-}
-
-.button-back {
-    background-color: #e0e0e0;
-    color: #333;
-}
-
-.button-update {
-    background: linear-gradient(to right, #a78bfa, #ec4899);
-    color: white;
 }

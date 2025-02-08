@@ -8,6 +8,27 @@
     <link rel="stylesheet" href="{{ asset('css/weight_logs/show.css') }}">
 </head>
 
+<style>
+    .header-button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-delete {
+        margin-right: 30px;
+        color: #ff4444;
+        background: none;
+        padding: 0.75rem;
+    }
+</style>
+
 <body>
     <header class="header">
         <a href="{{ route('weight_logs.index') }}" class="logo">PiGLy</a>
@@ -91,14 +112,14 @@
                 <div class="button-group">
                     <a href="{{ route('weight_logs.index') }}" class="btn btn-back">戻る</a>
                     <button type="submit" class="btn btn-update">更新</button>
-                </div>
-            </form>
 
-            <!-- 削除ボタン (別のフォームでDELETEリクエスト) -->
-            <form method="POST" action="{{ route('weight_logs.destroy', $weightLog->id) }}" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-delete">🗑️</button>
+                    <!-- 削除ボタン -->
+                    <form method="POST" action="{{ route('weight_logs.destroy', $weightLog->id) }}" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-delete">🗑️</button>
+                    </form>
+                </div>
             </form>
         </div>
     </div>

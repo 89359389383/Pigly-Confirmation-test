@@ -30,16 +30,6 @@ body {
     gap: 1rem;
 }
 
-.header-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: white;
-    color: #666;
-    text-decoration: none;
-    font-size: 0.875rem;
-}
-
 .container {
     max-width: 800px;
     margin: 2rem auto;
@@ -126,10 +116,4 @@ textarea {
 .btn-update {
     background: linear-gradient(to right, #cc90e8, #ff9ecd);
     color: white;
-}
-
-.btn-delete {
-    color: #ff4444;
-    background: none;
-    padding: 0.75rem;
 }

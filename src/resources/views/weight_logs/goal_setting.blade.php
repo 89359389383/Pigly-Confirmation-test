@@ -8,6 +8,50 @@
     <link rel="stylesheet" href="{{ asset('css/weight_logs/goal_setting.css') }}">
 </head>
 
+<style>
+    .main-content {
+        max-width: 400px;
+        margin: auto;
+        margin-top: 150px;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+        display: inline-flex;
+        /* flexboxを適用してボタン内の文字を中央配置 */
+        justify-content: center;
+        /* 横中央 */
+        align-items: center;
+        /* 縦中央 */
+        text-align: center;
+        /* 文字を中央揃え */
+        padding: 10px 20px;
+        /* 余白を追加 */
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        /* リンクの下線を消す */
+        width: 120px;
+        /* ボタン幅を指定 */
+        height: 40px;
+        /* ボタンの高さを指定 */
+    }
+
+    .button-back {
+        background-color: #e0e0e0;
+        color: #333;
+    }
+
+    .button-update {
+        background: linear-gradient(to right, #b19cd9, #ff69b4);
+        color: white;
+    }
+</style>
+
 <body>
     <header class="header">
         <a href="#" class="logo">PiGLy</a>
