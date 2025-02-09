@@ -112,14 +112,14 @@
                 <div class="button-group">
                     <a href="{{ route('weight_logs.index') }}" class="btn btn-back">戻る</a>
                     <button type="submit" class="btn btn-update">更新</button>
-
-                    <!-- 削除ボタン -->
-                    <form method="POST" action="{{ route('weight_logs.destroy', $weightLog->id) }}" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-delete">🗑️</button>
-                    </form>
                 </div>
+            </form>
+
+            <!-- 削除フォーム -->
+            <form method="POST" action="{{ route('weight_logs.destroy', $weightLog->id) }}" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-delete">🗑️</button>
             </form>
         </div>
     </div>

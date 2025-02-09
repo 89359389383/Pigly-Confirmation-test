@@ -50,6 +50,21 @@
         background: linear-gradient(to right, #b19cd9, #ff69b4);
         color: white;
     }
+
+
+    .header-button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1rem;
+        text-decoration: none;
+    }
 </style>
 
 <body>
@@ -76,7 +91,7 @@
             <div class="weight-input">
                 <input type="number" name="target_weight"
                     value="{{ old('target_weight', $goal->target_weight ?? '') }}"
-                    step="0.1" min="0" max="999.9">
+                    step="0.1" min="1" max="999.9">
                 <span>kg</span>
             </div>
 
