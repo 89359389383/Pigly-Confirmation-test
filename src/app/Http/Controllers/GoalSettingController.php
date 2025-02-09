@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WeightTarget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\GoalSettingRequest;
 
 class GoalSettingController extends Controller
